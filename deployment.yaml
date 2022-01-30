@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banknoteauth-gke
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banknoteauth
+  template:
+    metadata:
+      labels:
+        app: banknoteauth
+    spec:
+      containers:
+      - name: banknote
+        image: gcr.io/python-flask-kubernetes/banknote-gke
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"
+      
